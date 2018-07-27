@@ -8,7 +8,7 @@ public class Card {
 	public Card(Suit suit, CardRank cardRank) {
 		this.suit = suit;
 		this.cardRank = cardRank;
-		isFaceUp = false;
+		isFaceUp = true;
 	}
 
 	public int getRank() {
@@ -17,6 +17,10 @@ public class Card {
 	
 	public Suit getSuit() {
 		return suit;
+	}
+	
+	public void flipCard() {
+		isFaceUp = !isFaceUp;
 	}
 	
 	public String toString() {

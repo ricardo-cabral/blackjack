@@ -5,25 +5,25 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		Deck deck = new Deck();
-
-		Hand p1hand = new Hand();
-		Player player = new Player();
-
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter your name: ");
-		player.setName(sc.nextLine());
-
-		System.out.println("Welcome " + player.getName() + "!");
-
-		player.setHand(p1hand);
-
-		p1hand.addCard(deck.dealCard());
-		p1hand.addCard(deck.dealCard());
-
-		System.out.println(player.getName() + ": ");
-		p1hand.showHand();
-		System.out.println("Score: " + p1hand.getBlackJackValue());
-		System.out.println();
+		Card c1 = new Card(Suit.HEARTS, CardRank.ACE);
+		Card c2 = new Card(Suit.SPADES, CardRank.JACK);
+		
+		c1.flipCard();
+		c2.flipCard();
+		
+		Hand h1 = new Hand();
+		h1.addCard(c1);
+		h1.addCard(c2);
+		h1.showHand();
+		
+		Hand h2 = new Hand();
+		h1.give(c1, h2);
+		h1.clearCards();
+		System.out.println("HAND 1");h1.showHand();
+		System.out.println("HAND 2");h2.showHand();
+		
+		Deck d1 = new Deck();
+		d1.shuffle();
+		d1.getHand().showHand();
 	}
 }

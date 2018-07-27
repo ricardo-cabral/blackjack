@@ -1,5 +1,7 @@
 package eu.ricardocabral.blackjack;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -8,37 +10,37 @@ import java.util.Vector;
  */
 public class Hand 
 {
-    private Vector<Card> hand;
+    private List<Card> cards;
     
     
     public Hand() {
-    	hand = new Vector<Card>();
+    	cards = new ArrayList<Card>();
     }
     
     public void addCard(Card c) {
     	if(c != null) {
-    		hand.addElement(c);
+    		cards.add(c);
     	}
     }
     
     public void clearCards() {
-    	hand.clear();
+    	cards.clear();
     }
     
     public void showHand() {
-    	for (Card card : hand) {
+    	for (Card card : cards) {
 			System.out.println(card);
 		}
     }
     
     public int getHandSize() {
-    	return hand.size();
+    	return cards.size();
     }
 
     
     public Card getCard(int pos) {
-    	if(pos >= 0 && pos < hand.size()) {
-    		return hand.elementAt(pos);
+    	if(pos >= 0 && pos < cards.size()) {
+    		return cards.get(pos);
     	}else {
     		return null;
     	}
@@ -47,7 +49,7 @@ public class Hand
     public int getBlackJackValue() {
         int val = 0;
         boolean ace = false;
-        for(int i = 0; i < hand.size(); i++) {
+        for(int i = 0; i < cards.size(); i++) {
             Card card;
             card = getCard(i);
             val += card.getRank();
@@ -59,5 +61,21 @@ public class Hand
             val += 10;
         }
         return val;
+    }
+    
+    public boolean give(Card card, Hand otherHand) {
+    	if(!cards.contains(card)) {
+    		return false;
+    	}else {
+    		cards.remove(card);
+    		otherHand.addCard(card);
+    		return true;
+    	}
+    	
+    }
+
+    
+    public List<Card> getCards(){
+    	return cards;
     }
 }
