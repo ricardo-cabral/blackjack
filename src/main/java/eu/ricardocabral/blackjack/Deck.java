@@ -1,48 +1,34 @@
 package eu.ricardocabral.blackjack;
 
 import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Deck {
 
-	Hand hand = new Hand();
-	private List<Card> deck = new LinkedList<>();
+	private Hand hand = new Hand();
 	
 	public Deck() {
 		for(Suit suit : Suit.values()) {
 			for(CardRank value : CardRank.values()) {
-				deck.add(new Card(suit, value));
 				hand.addCard(new Card(suit, value));
 			}
 		}
 	}
 	
-	
 	public void shuffle() {
-		Collections.shuffle(deck);
 		Collections.shuffle(hand.getCards());
 	}
 	
 	public int getCardsLeft() {
-		return deck.size();
+		return hand.getHandSize();
 	}
-	
-	public Card dealCard() {
-		if(deck.size() == 52) {
-			shuffle();
-		}
-		
-		return deck.remove(0);
-	}
+
 	
 	public Card getCard(int i) {
-		return deck.get(i);
+		return hand.getCards().get(i);
 	}
 	
 	public Card remove(int i) {
-		return deck.remove(i);
-		
+		return hand.getCards().remove(i);
 	}
 	
 	public Hand getHand() {
@@ -57,9 +43,9 @@ public class Deck {
 		}
 	}
 	
-	public void deal(Hand hand, int perHand) {
+	public void deal(Hand h, int perHand) {
 		for (int i =0; i < perHand; i++) {
-			this.getHand().give(hand.getCards().get(0), hand);
+			this.getHand().give(hand.getCards().get(0), h);
 		}
 	}
 	

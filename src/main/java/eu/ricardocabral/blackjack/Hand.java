@@ -26,12 +26,7 @@ public class Hand
     public void clearCards() {
     	cards.clear();
     }
-    
-    public void showHand() {
-    	for (Card card : cards) {
-			System.out.println(card);
-		}
-    }
+
     
     public int getHandSize() {
     	return cards.size();
@@ -73,9 +68,31 @@ public class Hand
     	}
     	
     }
+    
+    public void flipCards() {
+    	for(Card card : cards) {
+    		card.flipCard();
+    	}
+    }
 
     
     public List<Card> getCards(){
     	return cards;
+    }
+    
+    public String showHand() {
+    	boolean allfaceUp = true;
+    	String str ="";
+    	for(Card c : cards) {
+    		str += c.toString()+ "\n";
+    		if(!c.isFaceUp()) {
+    			allfaceUp =false;
+    		}
+    	}
+    	
+    	if(allfaceUp) {
+    		str += " Total points = " + getBlackJackValue();
+    	}
+    	return str;
     }
 }
